@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "R8VcSB3WtI74pBhT62LRrPpqDsQxzXpBJisjlJG6bT8=",
+  "Source": "MessagerAPI",
+  "BasePath": "_content/MessagerAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
