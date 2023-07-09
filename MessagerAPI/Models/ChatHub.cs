@@ -5,10 +5,10 @@ namespace MessageApp.Hubs
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(string senderId, string receiverId, string message)
+        public async Task SendMessage(int SenderId, int ReceiverId, string message)
         {
             // Broadcast the message to all connected clients
-            await Clients.All.SendAsync("ReceiveMessage", senderId, receiverId, message);
+            await Clients.All.SendAsync("ReceiveMessage", SenderId, ReceiverId, message);
         }
     }
 }

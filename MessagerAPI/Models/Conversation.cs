@@ -5,9 +5,7 @@ using System.Collections.Generic;
 namespace MessagerAPI.Models
 {
     public class Conversation
-
     {
-
         [Key]
         public int ConversationId { get; set; }
 
@@ -18,11 +16,5 @@ namespace MessagerAPI.Models
         public Userr User2 { get; set; }
 
         public List<MessageModel> Messages { get; set; }
-
-
-
-        public Conversation()
-        {
-            Messages = new List<MessageModel>();
-        }
-    }}
+    }
+}

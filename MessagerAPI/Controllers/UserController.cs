@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MessageApp.Hubs;
 using Microsoft.AspNetCore.SignalR;
+using System;
 
 namespace MessageApp.Controllers
 {
@@ -94,14 +95,34 @@ namespace MessageApp.Controllers
             return BadRequest("Invalid user data.");
         }
         [HttpPost("sendMessage")]
-        public async Task<IActionResult> SendMessage(int senderId, int receiverId, string content)
+        public async Task<IActionResult> SendMessage(int SenderId, int ReceiverId, string Content)
         {
+
+            // Get or create a conversation based on the sender and receiver IDs
+            var conversation = await _context.Conversations.FirstOrDefaultAsync(c =>
+                (c.User1Id == SenderId && c.User2Id == ReceiverId) ||
+                (c.User1Id == ReceiverId && c.User2Id == SenderId));
+
+            if (conversation == null)
+            {
+                // Create a new conversation
+                conversation = new Conversation
+                {
+                    User1Id = SenderId,
+                    User2Id = ReceiverId
+                };
+                _context.Conversations.Add(conversation);
+                await _context.SaveChangesAsync();
+            }
+
             // Create and save the message in the database
             var message = new MessageModel
             {
-                SenderId = senderId,
-                ReceiverId = receiverId,
-                Content = content
+                SenderId = SenderId,
+                ReceiverId = ReceiverId,
+                Content = Content,
+                SentAt = System.DateTime.UtcNow,
+                ConversationId = conversation.ConversationId
             };
 
             _context.Messages.Add(message);
