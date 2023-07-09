@@ -4,6 +4,8 @@ using MessagerAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MessageApp.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace MessageApp.Controllers
 {
@@ -12,6 +14,8 @@ namespace MessageApp.Controllers
     public class UserController : ControllerBase
     {
         private readonly MessagerDbContext _context;
+     
+
 
         public UserController(MessagerDbContext context)
         {
@@ -89,5 +93,29 @@ namespace MessageApp.Controllers
 
             return BadRequest("Invalid user data.");
         }
+        [HttpPost("sendMessage")]
+        public async Task<IActionResult> SendMessage(int senderId, int receiverId, string content)
+        {
+            // Create and save the message in the database
+            var message = new MessageModel
+            {
+                SenderId = senderId,
+                ReceiverId = receiverId,
+                Content = content
+            };
+
+            _context.Messages.Add(message);
+            await _context.SaveChangesAsync();
+
+            return Ok("Message sent successfully.");
+        }
     }
 }
+
+
+
+
+
+
+
+  

@@ -75,3 +75,13 @@
 /home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
 /home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/MessagePack.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/MessagePack.Annotations.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.AspNetCore.Connections.Abstractions.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.AspNetCore.SignalR.Common.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.AspNetCore.SignalR.Protocols.MessagePack.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.Bcl.AsyncInterfaces.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.Extensions.Features.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.Extensions.Options.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Newtonsoft.Json.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/System.Net.WebSockets.WebSocketProtocol.dll
