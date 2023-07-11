@@ -1,29 +1,36 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace MessagerAPI.Models
+
 {
+public class MessageModel
+        {
+            [Key]
+            public int Id { get; set; }
 
-    public class MessageModel
-    {
-        [Key]
-        public int MessageId { get; set; }
+            public string Content { get; set; }
 
-        [Required]
-        public int SenderId { get; set; }
+            public DateTime SentAt { get; set; }
 
-        [Required]
-        public int ReceiverId { get; set; }
+            // Foreign key for Sender
+            [ForeignKey("Sender")]
+            public string SenderEmail { get; set; }
+            public IdentityUser Sender { get; set; }
 
-        [Required]
-        public string Content { get; set; }
+            // Foreign key for Receiver
+            [ForeignKey("Receiver")]
+            public string ReceiverEmail { get; set; }
+            public IdentityUser Receiver { get; set; }
 
-        [Required]
-        public DateTime? SentAt { get; set; }
+            [ForeignKey("ConversationId")]
+            public int ConversationId{ get; set; }
+            public Conversation Conversation { get; set; }
+}
 
-        public int ConversationId { get; set; }
-        public Conversation Conversation { get; set; }
-    }}
+  }
 
 
 

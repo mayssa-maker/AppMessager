@@ -3,6 +3,7 @@ using System;
 using MessagerAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,20 +11,22 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MessagerAPI.Migrations
 {
     [DbContext(typeof(MessagerDbContext))]
-    partial class MessagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230710235444_initialMigration")]
+    partial class initialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
 
             modelBuilder.Entity("MessagerAPI.Models.Conversation", b =>
                 {
-                    b.Property<int>("ConversationId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("ConversationId");
+                    b.HasKey("Id");
 
                     b.ToTable("Conversations");
                 });
@@ -41,12 +44,7 @@ namespace MessagerAPI.Migrations
                     b.Property<int>("ConversationId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ReceiverEmail")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SenderEmail")
-                        .IsRequired()
+                    b.Property<string>("SenderId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("SentAt")
@@ -56,9 +54,7 @@ namespace MessagerAPI.Migrations
 
                     b.HasIndex("ConversationId");
 
-                    b.HasIndex("ReceiverEmail");
-
-                    b.HasIndex("SenderEmail");
+                    b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
                 });
@@ -263,21 +259,11 @@ namespace MessagerAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Receiver")
-                        .WithMany()
-                        .HasForeignKey("ReceiverEmail")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Sender")
                         .WithMany()
-                        .HasForeignKey("SenderEmail")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SenderId");
 
                     b.Navigation("Conversation");
-
-                    b.Navigation("Receiver");
 
                     b.Navigation("Sender");
                 });

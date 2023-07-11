@@ -1,44 +1,48 @@
-using Microsoft.EntityFrameworkCore;
 using MessagerAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore.Sqlite;
 
-namespace MessageAppBack.Data
+namespace MessagerAPI.Data
 {
-    public class MessagerDbContext : DbContext
-    {
-        protected readonly IConfiguration Configuration;
-        public MessagerDbContext(IConfiguration configuration)
+    public class MessagerDbContext : IdentityDbContext<IdentityUser>
+{   protected readonly IConfiguration Configuration;
+   
+
+    public MessagerDbContext(IConfiguration configuration)
+       
         {
             Configuration = configuration;
-        }
-
-        public DbSet<Userr> Users { get; set; }
-        public DbSet<MessageModel> Messages { get; set; }
+    }
         public DbSet<Conversation> Conversations { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder Options)
-        {
-            Options.UseSqlite(Configuration.GetConnectionString("webApiDb"));
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<MessageModel>()
-                   .HasOne(m => m.Conversation)
-                   .WithMany(c => c.Messages)
-                   .HasForeignKey(m => m.ConversationId);
-
-            modelBuilder.Entity<Conversation>()
-          .HasOne(c => c.User1)
-          .WithMany()
-          .HasForeignKey(c => c.User1Id);
-
-            modelBuilder.Entity<Conversation>()
-                .HasOne(c => c.User2)
-                .WithMany()
-                .HasForeignKey(c => c.User2Id);
+        public DbSet<MessageModel> Messages { get; set; }
+    protected override void OnConfiguring(DbContextOptionsBuilder Options)
+    {
+       
+    
+                // Configure the database connection here
+                Options.UseSqlite(Configuration.GetConnectionString("webApiDb"));
+    
+}
 
 
-        }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        // Configure the relationships between Conversations and Messages
+        modelBuilder.Entity<Conversation>()
+            .HasMany(c => c.Messages)
+            .WithOne(m => m.Conversation)
+            .HasForeignKey(m => m.ConversationId);
     }
 }
+
+ 
+ 
+}
+ 
+ 
+ 

@@ -85,3 +85,8 @@
 /home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.Extensions.Options.dll
 /home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Newtonsoft.Json.dll
 /home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/System.Net.WebSockets.WebSocketProtocol.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.Internal.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.Extensions.Identity.Core.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.Extensions.Identity.Stores.dll

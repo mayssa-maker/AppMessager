@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9SBt71uRFxljAYI6QkNMhm+s4nepU5O3Ba3vQ3gI4nDf6Ga5ch4WBzUt7QqWt4AlB+P2z9QVgdU6Fe/tp8rYlA==",
+  "dgSpecHash": "y4fTmNbmwUzT/fFvisd+45vzh2jsv7byi4rczdnN6+8A5jkbUC3ehbOmV5raAvOiL+ZmIUodAi0T/72rhAJT+Q==",
   "success": true,
   "projectFilePath": "/home/maysa/TestApp/MessagerAPI/MessagerAPI.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,8 @@
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.authorization/2.2.0/microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.authorization.policy/2.2.0/microsoft.aspnetcore.authorization.policy.2.2.0.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.connections.abstractions/7.0.8/microsoft.aspnetcore.connections.abstractions.7.0.8.nupkg.sha512",
+    "/home/maysa/.nuget/packages/microsoft.aspnetcore.cryptography.internal/7.0.8/microsoft.aspnetcore.cryptography.internal.7.0.8.nupkg.sha512",
+    "/home/maysa/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/7.0.8/microsoft.aspnetcore.cryptography.keyderivation.7.0.8.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.hosting.abstractions/2.2.0/microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.hosting.server.abstractions/2.2.0/microsoft.aspnetcore.hosting.server.abstractions.2.2.0.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.http/2.2.0/microsoft.aspnetcore.http.2.2.0.nupkg.sha512",
@@ -20,6 +22,7 @@
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.http.connections.common/1.1.0/microsoft.aspnetcore.http.connections.common.1.1.0.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.http.extensions/2.2.0/microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.http.features/2.2.0/microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+    "/home/maysa/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/7.0.8/microsoft.aspnetcore.identity.entityframeworkcore.7.0.8.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.openapi/7.0.8/microsoft.aspnetcore.openapi.7.0.8.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.routing/2.2.0/microsoft.aspnetcore.routing.2.2.0.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.aspnetcore.routing.abstractions/2.2.0/microsoft.aspnetcore.routing.abstractions.2.2.0.nupkg.sha512",
@@ -50,6 +53,8 @@
     "/home/maysa/.nuget/packages/microsoft.extensions.features/7.0.8/microsoft.extensions.features.7.0.8.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.extensions.fileproviders.abstractions/2.2.0/microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.extensions.hosting.abstractions/2.2.0/microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512",
+    "/home/maysa/.nuget/packages/microsoft.extensions.identity.core/7.0.8/microsoft.extensions.identity.core.7.0.8.nupkg.sha512",
+    "/home/maysa/.nuget/packages/microsoft.extensions.identity.stores/7.0.8/microsoft.extensions.identity.stores.7.0.8.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.extensions.logging/7.0.0/microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.extensions.logging.abstractions/7.0.0/microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
     "/home/maysa/.nuget/packages/microsoft.extensions.objectpool/2.2.0/microsoft.extensions.objectpool.2.2.0.nupkg.sha512",

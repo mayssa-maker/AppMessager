@@ -5,7 +5,7 @@
 namespace MessagerAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class updateModels : Migration
+    public partial class modelschange : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
