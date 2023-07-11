@@ -17,12 +17,12 @@ public class MessageModel
 
             // Foreign key for Sender
             [ForeignKey("Sender")]
-            public string SenderEmail { get; set; }
+            public string SenderId { get; set; }
             public IdentityUser Sender { get; set; }
 
             // Foreign key for Receiver
             [ForeignKey("Receiver")]
-            public string ReceiverEmail { get; set; }
+            public string ReceiverId { get; set; }
             public IdentityUser Receiver { get; set; }
 
             [ForeignKey("ConversationId")]

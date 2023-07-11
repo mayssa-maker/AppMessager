@@ -5,6 +5,9 @@ using MessagerAPI.Data;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 
 namespace MessagerAPI.Controllers{
 [ApiController]
@@ -77,6 +80,7 @@ public class AuthController : ControllerBase
             Token = accessToken,
         });
     }
+
         [HttpPost]
         [Route("sendMessage")]
         [Authorize]
@@ -95,12 +99,21 @@ public class AuthController : ControllerBase
                 // Handle the case when the email is missing or empty
                 return BadRequest("Email is missing or invalid.");
             }
-           
+
+            // Retrieve the receiver user by email
+            var receiver = await _userManager.FindByEmailAsync(receiverEmail);
+            if (receiver == null)
+            {
+                // Handle the case when the receiver is not found
+                return BadRequest("Receiver not found.");
+            }
+
 
             // Retrieve the conversation from the database based on sender email
             var conversation = await _context.Conversations
                 .Include(c => c.Messages)
-                .FirstOrDefaultAsync(c => c.Messages.Any(m => m.SenderEmail == userEmail || m.ReceiverEmail == userEmail));
+                .FirstOrDefaultAsync(c => c.Messages.Any(m => m.Sender.Email == user.Email && m.Receiver.Email == receiver.Email) ||
+            c.Messages.Any(m => m.Sender.Email == receiver.Email && m.Receiver.Email == user.Email));
 
             if (conversation == null)
             {
@@ -116,7 +129,9 @@ public class AuthController : ControllerBase
             var message = new MessageModel
             {
                 Sender = user,
-                Receiver = await _userManager.FindByEmailAsync(receiverEmail),
+                SenderId=user.Id,
+                Receiver = receiver,
+                ReceiverId=receiver.Id,
                 Content = content,
                 SentAt = DateTime.UtcNow
             };
@@ -127,20 +142,65 @@ public class AuthController : ControllerBase
             return Ok("Message sent successfully.");
         }
 
+
         [HttpGet]
         [Route("messages")]
         [Authorize]
         public async Task<IActionResult> GetUserMessagesAsync()
         {
             var user = await _userManager.GetUserAsync(User);
-            var userEmail = user.Email;
-
+            if (user == null)
+            {
+                // Handle the case when the user is not found
+                return BadRequest("User not found.");
+            }
 
             // Retrieve the user's messages from the database
             var messages = _context.Messages
-                .Where(m => m.SenderEmail == userEmail|| m.ReceiverEmail== userEmail)
+                .Where(m => m.Sender.Email == user.Email || m.Receiver.Email == user.Email)
                 .ToList();
 
             return Ok(messages);
+        }
+
+        [HttpGet]
+        [Route("conversations")]
+        [Authorize]
+        public async Task<IActionResult> GetConversationsAsync(string receiverEmail)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                // Handle the case when the user is not found
+                return BadRequest("User not found.");
+            }
+
+
+            // Retrieve the receiver user by email
+            var receiver = await _userManager.FindByEmailAsync(receiverEmail);
+            if (receiver == null)
+            {
+                // Handle the case when the receiver is not found
+                return BadRequest("Receiver not found.");
+            }
+            // Retrieve the conversations between the sender and the specified receiver
+            var conversations = _context.Conversations
+                .Include(c => c.Messages)
+                .Where(c =>
+                    (c.Messages.Any(m => m.Sender.UserName == user.UserName && m.Receiver.UserName == receiver.UserName)) ||
+                    (c.Messages.Any(m => m.Sender.UserName == receiver.UserName && m.Receiver.UserName == user.UserName))
+                )
+                .ToList();
+
+
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+
+            // Serialize the messages using the options
+            var json = JsonSerializer.Serialize(conversations, options);
+
+            return Ok(json);
         }
 }}

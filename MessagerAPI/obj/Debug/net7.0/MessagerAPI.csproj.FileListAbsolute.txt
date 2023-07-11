@@ -90,3 +90,6 @@
 /home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 /home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.Extensions.Identity.Core.dll
 /home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.Extensions.Identity.Stores.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.AspNetCore.JsonPatch.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/home/maysa/TestApp/MessagerAPI/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll
