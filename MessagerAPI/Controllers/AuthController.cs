@@ -4,6 +4,7 @@ using MessagerAPI.Models;
 using MessagerAPI.Data;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace MessagerAPI.Controllers{
 [ApiController]
@@ -76,26 +77,51 @@ public class AuthController : ControllerBase
             Token = accessToken,
         });
     }
-
         [HttpPost]
         [Route("sendMessage")]
         [Authorize]
-        public async Task<IActionResult> SendMessage(string content, string receiverEmail, int conversationId)
+        public async Task<IActionResult> SendMessage(string content, string receiverEmail)
         {
-
             var user = await _userManager.GetUserAsync(User);
-            var senderEmail = user.Email;
+            if (user == null)
+            {
+                // Handle the case when the user is not found
+                return BadRequest("User not found.");
+            }
+
+            var userEmail = await _userManager.GetEmailAsync(user);
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                // Handle the case when the email is missing or empty
+                return BadRequest("Email is missing or invalid.");
+            }
            
+
+            // Retrieve the conversation from the database based on sender email
+            var conversation = await _context.Conversations
+                .Include(c => c.Messages)
+                .FirstOrDefaultAsync(c => c.Messages.Any(m => m.SenderEmail == userEmail || m.ReceiverEmail == userEmail));
+
+            if (conversation == null)
+            {
+                // Create a new conversation if it doesn't exist
+                conversation = new Conversation
+                {
+                    Messages = new List<MessageModel>()
+                };
+                _context.Conversations.Add(conversation);
+            }
+
             // Create and save the message in the database
             var message = new MessageModel
             {
-                SenderEmail=senderEmail,
-                ReceiverEmail = receiverEmail,
+                Sender = user,
+                Receiver = await _userManager.FindByEmailAsync(receiverEmail),
                 Content = content,
-                SentAt = System.DateTime.UtcNow
+                SentAt = DateTime.UtcNow
             };
 
-            _context.Messages.Add(message);
+            conversation.Messages.Add(message);
             await _context.SaveChangesAsync();
 
             return Ok("Message sent successfully.");

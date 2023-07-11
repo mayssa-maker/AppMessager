@@ -25,8 +25,8 @@ namespace MessagerAPI
         private JwtSecurityToken CreateJwtToken(List<Claim> claims, Microsoft.IdentityModel.Tokens.SigningCredentials credentials,
             DateTime expiration) =>
             new(
-                "apiWithAuthBackend",
-                "apiWithAuthBackend",
+                "https://localhost:7100",
+                "https://localhost:7100",
                 claims,
                 expires: expiration,
                 signingCredentials: credentials
@@ -38,7 +38,7 @@ namespace MessagerAPI
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, "TokenForTheApiWithAuth"),
+    
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)),
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
@@ -57,7 +57,8 @@ namespace MessagerAPI
         {
             return new SigningCredentials(
                 new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes("!SomethingSecret!")
+                    
+                   Encoding.UTF8.GetBytes("You_Need_To_Provide_A_Longer_Secret_Key_HereYou_Need_To_Provide_A_Longer_Secret_Key_HereYou_Need_To_Provide_A_Longer_Secret_Key_Here")
                 ),
                 SecurityAlgorithms.HmacSha256
             );
