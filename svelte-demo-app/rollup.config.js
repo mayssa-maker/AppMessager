@@ -6,6 +6,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import css from 'rollup-plugin-css-only';
 
+
 const production = !process.env.ROLLUP_WATCH;
 
 function serve() {
@@ -44,6 +45,7 @@ export default {
 				dev: !production
 			}
 		}),
+		
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
 		css({ output: 'bundle.css' }),
@@ -59,6 +61,7 @@ export default {
 			exportConditions: ['svelte']
 		}),
 		commonjs(),
+		
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated

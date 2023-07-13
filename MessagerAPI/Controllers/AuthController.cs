@@ -51,7 +51,7 @@ public class AuthController : ControllerBase
 
     [HttpPost]
     [Route("login")]
-    public async Task<ActionResult<AuthResponse>> Authenticate([FromBody] AuthRequest request)
+    public async Task<ActionResult<AuthResponse>> Login([FromBody] AuthRequest request)
     {
         if (!ModelState.IsValid)
         {

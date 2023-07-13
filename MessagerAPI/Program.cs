@@ -33,7 +33,7 @@ builder.Services.AddCors(options =>
     {
         builder
             .WithOrigins(
-            "http://localhost")
+            "https://localhost","http://localhost")
             .AllowCredentials()
             .AllowAnyHeader()
             .SetIsOriginAllowed(_ => true)
@@ -70,7 +70,7 @@ builder.Services.AddSwaggerGen(option =>
         }
     });
 });
-                   
+
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -117,16 +117,34 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.MapControllers();
 app.UseRouting();
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
 
+
 app.UseEndpoints(endpoints =>
-    {
-        endpoints.MapControllers();
-        endpoints.MapHub<ChatHub>("/chatHub");
-    });
+{
+    endpoints.MapControllers();
 
+    endpoints.MapHub<ChatHub>("/chatHub");
+    endpoints.MapControllerRoute(
+    name: "login",
+    pattern: "Auth/login",
+    defaults: new { controller = "AuthController", action = "Login" }
+    );
 
+    endpoints.MapControllerRoute(
+    name: "register",
+    pattern: "Auth/register",
+    defaults: new { controller = "AuthController", action = "Register" }
+    );
+
+    endpoints.MapControllerRoute(
+    name: "conversations",
+    pattern: "Auth/conversations",
+    defaults: new { controller = "AuthController", action = "GetConversationsAsync" }
+    );
+});
 
 
 app.Run();
